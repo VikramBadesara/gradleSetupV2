@@ -14,9 +14,7 @@ import java.time.format.DateTimeFormatter
 fun main() {
     try {
         println("\n\n_____________________Starting Server..._____________________\n\n")
-
-
-        var baseUri: URI = UriBuilder.fromUri("http://localhost").port(8080).build()
+        var baseUri: URI = UriBuilder.fromUri("http://localhost").port(8000).build()
         var config: ResourceConfig = ResourceConfig(ApiHandler::class.java)
 
         var server: HttpServer = GrizzlyHttpServerFactory.createHttpServer(baseUri, config)

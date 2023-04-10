@@ -2,41 +2,45 @@ package org.example.resources
 
 import org.example.service.OrderService
 
-import org.json.JSONObject
 import java.util.*
 import javax.ws.rs.*
 import java.time.*
 import javax.ws.rs.core.MediaType
 
-@Path("/orders")
+@Path("/apis")
 class ApiHandler {
+    @Path("/orders")
+    class Order {
+        @GET
+        @Path("/getOrders")
+        @Produces(MediaType.APPLICATION_JSON)
+        fun getOrders(): String {
+            println("Hit...")
+            val res = OrderService().startProcess()
+            return res.toString()
+        }
 
-//    var orderService = OrderService().startProcess()
-
-    @GET
-    @Path("/getOrders")
-    @Produces(MediaType.APPLICATION_JSON)
-    fun getOrders(): String {
-        println("Hit...")
-        val res = OrderService().startProcess()
-        return res.toString()
-    }
-
-    @POST
-    @Path("/postOrder")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    fun postOrder(request: String): String {
-        println("Hit..")
-        println(request)
-        return request
+        @POST
+        @Path("/postOrder")
+        @Consumes(MediaType.APPLICATION_JSON)
+        @Produces(MediaType.APPLICATION_JSON)
+        fun postOrder(request: String): String {
+            println("Hit..")
+            println(request)
+            return request
 //        val res = OrderService().postOrder()
 //        return res.toString()
+        }
     }
 
-
+    @GET
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun basicRoute(): String {
+        println("-----Hit for basic route-----")
+        return "Basic route is up and running"
+    }
 }
-
 
 //@Path("/v1")
 //class getData {
